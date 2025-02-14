@@ -1,8 +1,11 @@
+import com.mongodb.MongoException;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+
+import java.io.IOException;
 
 public class CheckTester implements AbstractTester{
     private AbstractTester tester;
@@ -36,7 +39,7 @@ public class CheckTester implements AbstractTester{
 
             // Выбор коллекции
             MongoCollection<Document> collection = database.getCollection(collectionName); // Имя коллекции
-
+            System.out.println("Количество документов в коллекции " + collection.countDocuments());
 
             // Создание документа из JSON
             Document doc = Document.parse(document);
@@ -47,7 +50,7 @@ public class CheckTester implements AbstractTester{
             result = result && (count == amount);
 
 
-        } catch (Exception e) {
+        } catch (MongoException e) {
             e.printStackTrace();
         }
         return result;

@@ -1,0 +1,8 @@
+add test temperature {_id:"1", value:"10"}
+add test temperature {_id:"2", value:"1"}
+add test temperature {_id:"3", value:"5"}
+add test temperature {_id:"4", value:"4"}
+add test temperature {_id:"5", value:"3"}
+add test temperature {_id:"6", value:"2"}
+add test temperature {_id:"7", value:"6"}
+check test res 1 {min:"2", max:"6"}

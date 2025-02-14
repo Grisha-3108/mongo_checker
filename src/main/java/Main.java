@@ -1,9 +1,11 @@
 
 
+import com.mongodb.MongoException;
 import com.mongodb.client.*;
 import org.bson.Document;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,7 +35,6 @@ public class Main {
         //Выполнение сценария пользователя
         try{
             String[] command = {args[2], args[0]};
-
             Runtime.getRuntime().exec(command);
 
         }catch (IOException e){
