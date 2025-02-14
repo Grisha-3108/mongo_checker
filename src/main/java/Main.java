@@ -1,12 +1,11 @@
 
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.*;
 import org.bson.Document;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -40,19 +39,23 @@ public class Main {
         }catch (IOException e){
             e.printStackTrace();
         }
-
-
-        //Очистка базы
-//        try (MongoClient mongoClient = MongoClients.create(args[1])) {
-//            MongoDatabase database = mongoClient.getDatabase(databaseName); // Имя базы данных
-//            //Очистка базы
-//            database.drop();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-
         //Проверка и вывод результата
         System.out.println(tester.checkDocuments());
 
+        //Очистка базы
+        try (MongoClient mongoClient = MongoClients.create(args[1])) {
+            List<String> systemDatabases = new ArrayList<>(List.of("local", "admin", "config"));
+            //Получаем список баз
+            MongoIterable<String> databases =  mongoClient.listDatabaseNames();
+            //Выполняем очистку всех баз
+            for(var base: databases){
+                //Проверка того, что база не является системной
+                if(!systemDatabases.contains(base)){
+                    mongoClient.getDatabase(base).drop();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

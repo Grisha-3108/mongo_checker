@@ -46,6 +46,7 @@ public class CheckTester implements AbstractTester{
 
             result = result && (count == amount);
 
+
         } catch (Exception e) {
             e.printStackTrace();
         }
