@@ -5,6 +5,8 @@ import com.mongodb.client.*;
 import org.bson.Document;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,7 @@ public class Main {
         try{
             String[] command = {args[2], args[0]};
             Process mongoExecute = Runtime.getRuntime().exec(command);
+            InputStream in = mongoExecute.getErrorStream();
             mongoExecute.waitFor();
         }catch (IOException e){
             e.printStackTrace();
