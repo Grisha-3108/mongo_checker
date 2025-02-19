@@ -35,9 +35,12 @@ public class Main {
         //Выполнение сценария пользователя
         try{
             String[] command = {args[2], args[0]};
-            Runtime.getRuntime().exec(command);
-
+            Process mongoExecute = Runtime.getRuntime().exec(command);
+            mongoExecute.waitFor();
         }catch (IOException e){
+            e.printStackTrace();
+        }catch (InterruptedException e){
+            System.out.println("Ошибка! Выполнение сценария пользователя было прервано!");
             e.printStackTrace();
         }
         //Проверка и вывод результата

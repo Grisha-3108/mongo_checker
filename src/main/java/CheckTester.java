@@ -31,6 +31,7 @@ public class CheckTester implements AbstractTester{
 
     @Override
     public boolean checkDocuments() {
+        
         boolean result =  tester.checkDocuments();
         // Подключение к MongoDB
         try (MongoClient mongoClient = MongoClients.create(connectionString)) {
@@ -39,7 +40,7 @@ public class CheckTester implements AbstractTester{
 
             // Выбор коллекции
             MongoCollection<Document> collection = database.getCollection(collectionName); // Имя коллекции
-            //System.out.println("Количество документов в коллекции " + collection.countDocuments());
+
 
             // Создание документа из JSON
             Document doc = Document.parse(document);
