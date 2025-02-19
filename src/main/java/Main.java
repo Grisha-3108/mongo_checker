@@ -38,7 +38,7 @@ public class Main {
         try{
             String[] command = {args[2], args[0]};
             Process mongoExecute = Runtime.getRuntime().exec(command);
-            InputStream in = mongoExecute.getErrorStream();
+            //Ожидание завершения работы сценария пользователя
             mongoExecute.waitFor();
         }catch (IOException e){
             e.printStackTrace();
